@@ -20,6 +20,9 @@ spec:
           limits:
             cpu: 1Gi
             memory: 1024Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
         env:
           - name: MYSQL_USER
             value: root
