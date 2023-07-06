@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- service.yaml
+- presync.yaml
+images:
+- name: walk1ng/react-demo-server
+  newTag: 1bcb0bacfe1e1d295d094361481288a72784234a

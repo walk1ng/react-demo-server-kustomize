@@ -1,0 +1,141 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-demo-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-demo-db
+  template:
+    metadata:
+      labels:
+        app: react-demo-db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: a123456
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: initdb-scripts
+              mountPath: /docker-entrypoint-initdb.d/
+      volumes:
+        - name: initdb-scripts
+          configMap:
+            name: mysql-init-scripts
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-scripts
+data:
+  init-script.sql: |
+    CREATE DATABASE IF NOT EXISTS itcast;
+    USE itcast;
+    create table if not exists user (
+        id int auto_increment primary key ,
+        username varchar(20) ,
+        password varchar(20)
+    ) comment '用户表';
+
+    create table if not exists user_info (
+        username varchar(20) not null ,
+        name varchar(20) not null ,
+        gender char(5)
+    ) comment '用户信息表';
+
+    create table if not exists role (
+        id int ,
+        name varchar(10)
+    ) comment '角色表';
+
+    create table if not exists menu (
+        id int ,
+        title varchar(10) ,
+        pid int ,
+        icon varchar(30) ,
+        route_path varchar(20) ,
+        route_element varchar(20)
+    ) comment '菜单表';
+
+    create table if not exists func (
+        id int ,
+        name varchar(10)
+    ) comment '功能表';
+
+    create table if not exists user_role (
+        user_id int ,
+        role_id int
+    ) comment '用户角色表';
+
+    create table if not exists role_menu (
+        role_id int ,
+        menu_id int
+    ) comment '角色菜单表';
+
+    insert into menu values
+        (101, '菜单1', 0, 'EditOutlined', '/student', 'a8main_student'),
+        (102, '菜单2', 0, 'AreaChartOutlined', '/teacher', 'a8main_teacher'),
+        (103, '菜单3', 0, 'AccountBookOutlined', null, null),
+        (104, '菜单31', 103, 'AlertOutlined', '/user1', 'a8main_user'),
+        (105, '菜单32', 103, 'AppstoreOutlined', '/user2', 'a8main_user');
+
+    insert into func values
+        (200, '功能1'),
+        (201, '功能2'),
+        (202, '功能3');
+
+    insert into user_role values
+        (1, 10),
+        (2, 11),
+        (3, 12);
+
+    insert into role_menu values
+        (10, 101),
+        (10, 102),
+        (10, 103),
+        (10, 104),
+        (10, 105),
+        (11, 101),
+        (11, 102),
+        (12, 103),
+        (12, 104);
+
+    insert into role values
+        (10, '管理员'),
+        (11, '运维'),
+        (12, '顾客');
+
+    insert into user values
+        (1, 'admin', '123'),
+        (2, 'zhang', '123'),
+        (3, 'li','123');
+
+    insert into user_info values
+        ('admin', '管理员','男'),
+        ('zhang','张三','男'),
+        ('li','李四','女');
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-demo-db
+spec:
+  selector:
+    app: react-demo-db
+  ports:
+  - port: 3306  
+    targetPort: 3306
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-root-pass
+type: Opaque
+data:
+  password: MTIzNDU2Cg==

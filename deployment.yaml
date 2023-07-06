@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-demo-server
+spec:
+  selector:
+    matchLabels:
+      app: react-demo-server
+  template:
+    metadata:
+      labels:
+        app: react-demo-server
+    spec:
+      containers:
+      - name: server
+        image: walk1ng/react-demo-server:v1
+        ports:
+        - containerPort: 8080
+        env:
+          - name: MYSQL_USER
+            value: root
+          - name: MYSQL_PASSWORD
+            value: a123456
+          - name: MYSQL_DB
+            value: itcast
+          - name: MYSQL_SVC
+            value: react-demo-db.svc.cluster.local:3306
