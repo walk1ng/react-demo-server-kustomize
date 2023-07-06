@@ -16,6 +16,10 @@ spec:
         image: walk1ng/react-demo-server:v1
         ports:
         - containerPort: 8080
+        resources:
+          limits:
+            cpu: 1Gi
+            memory: 1024Mi
         env:
           - name: MYSQL_USER
             value: root
