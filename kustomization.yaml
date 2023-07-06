@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+- mysql.yaml
 images:
 - name: walk1ng/react-demo-server
   newTag: f26330426eeb0a48fd18cba08f74f2e2d1e3e890
