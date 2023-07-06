@@ -5,4 +5,4 @@ resources:
 - service.yaml
 images:
 - name: walk1ng/react-demo-server
-  newTag: v1
+  newTag: f26330426eeb0a48fd18cba08f74f2e2d1e3e890
