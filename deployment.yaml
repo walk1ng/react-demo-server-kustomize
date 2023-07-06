@@ -24,4 +24,4 @@ spec:
           - name: MYSQL_DB
             value: itcast
           - name: MYSQL_SVC
-            value: react-demo-db.svc.cluster.local:3306
+            value: react-demo-db:3306
