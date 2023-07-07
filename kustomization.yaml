@@ -6,4 +6,4 @@ resources:
 - mysql.yaml
 images:
 - name: walk1ng/react-demo-server
-  newTag: f26330426eeb0a48fd18cba08f74f2e2d1e3e890
+  newTag: 8198e2794bf4627b0bf48140bb81bb8dfd906438
