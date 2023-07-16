@@ -25,9 +25,15 @@ spec:
             memory: 128Mi
         env:
           - name: MYSQL_USER
-            value: root
+            valueFrom:
+              secretKeyRef:
+                name: mysql-root-pass
+                key: username
           - name: MYSQL_PASSWORD
-            value: a123456
+            valueFrom:
+              secretKeyRef:
+                name: mysql-root-pass
+                key: password
           - name: MYSQL_DB
             value: itcast
           - name: MYSQL_SVC

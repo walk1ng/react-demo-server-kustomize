@@ -18,7 +18,10 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: a123456
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-root-pass
+                  key: password
           ports:
             - containerPort: 3306
           resources:
@@ -145,4 +148,5 @@ metadata:
   name: mysql-root-pass
 type: Opaque
 data:
-  password: MTIzNDU2Cg==
+  password: YTEyMzQ1Ng==
+  username: cm9vdA==
