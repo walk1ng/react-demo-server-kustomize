@@ -141,12 +141,3 @@ spec:
   ports:
   - port: 3306  
     targetPort: 3306
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysql-root-pass
-type: Opaque
-data:
-  password: YTEyMzQ1Ng==
-  username: cm9vdA==
