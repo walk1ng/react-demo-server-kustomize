@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-demo-server
+spec:
+  selector:
+    matchLabels:
+      app: react-demo-server
+  template:
+    metadata:
+      labels:
+        app: react-demo-server
+    spec:
+      containers:
+      - name: server
+        image: walk1ng/react-demo-server:v1
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1024Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        env:
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: mysql-root-pass
+                key: username
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-root-pass
+                key: password
+          - name: MYSQL_DB
+            value: itcast
+          - name: MYSQL_SVC
+            value: react-demo-db:3306
