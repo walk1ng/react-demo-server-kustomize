@@ -21,7 +21,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: app-server-sa
-  namespace: ${NAMESPACE}
+  namespace: ${namespace}
 roleRef:
   kind: ClusterRole
   name: pod-ns-reader
