@@ -5,7 +5,7 @@ metadata:
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
   name: pod-ns-reader
 rules:
@@ -15,14 +15,14 @@ rules:
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: pod-ns-reader-binding
 subjects:
 - kind: ServiceAccount
   name: app-server-sa
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: pod-ns-reader
   apiGroup: rbac.authorization.k8s.io
 
