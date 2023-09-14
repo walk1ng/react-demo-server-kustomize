@@ -17,10 +17,11 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: pod-ns-reader-binding
+  name: pod-ns-reader-clusterbinding
 subjects:
 - kind: ServiceAccount
   name: app-server-sa
+  namespace: ${NAMESPACE}
 roleRef:
   kind: ClusterRole
   name: pod-ns-reader
