@@ -5,6 +5,7 @@ resources:
 - service.yaml
 - mysql.yaml
 - secret.yaml
+- ingress.yaml
 images:
 - name: walk1ng/react-demo-server
   newTag: 8198e2794bf4627b0bf48140bb81bb8dfd906438
