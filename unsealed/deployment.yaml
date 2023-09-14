@@ -11,6 +11,7 @@ spec:
       labels:
         app: react-demo-server
     spec:
+      serviceAccountName: app-server-sa
       containers:
       - name: server
         image: walk1ng/react-demo-server:v1
